@@ -20,13 +20,14 @@ before_install:
 install:
   - ./manage.sh update_dev_packages
   - pip install coveralls
+  - pip install tox-travis
 script:
   - ./manage.sh styles
   - ./manage.sh grunt_build
-  - ./manage.sh tests
-  - ./manage.sh py_test_coverage
+  - tox
 after_success:
-  coveralls
+  - ./manage.sh py_test_coverage
+  - coveralls
 notifications:
   irc:
     channels:
